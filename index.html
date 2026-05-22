@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Work-Life Balance Police ⭐</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { min-height: 100vh; background: linear-gradient(160deg, #ffe6f0 0%, #fff3e0 50%, #e8f4ff 100%); font-family: 'Segoe UI', sans-serif; padding: 20px 16px 40px; }
+  .pixel { font-family: 'Press Start 2P', monospace; }
+  .wrap { max-width: 600px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 20px; }
+  .princess { font-size: 48px; animation: floating 3s ease-in-out infinite; display: inline-block; margin-bottom: 6px; }
+  @keyframes floating { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .title-badge { font-family: 'Press Start 2P', monospace; font-size: 9px; line-height: 2; color: white; background: #e0006e; display: inline-block; padding: 10px 20px; border: 3px solid #000; box-shadow: 4px 4px 0 #000; letter-spacing: 1px; }
+  .stars { display: flex; justify-content: center; gap: 8px; margin-top: 8px; font-size: 20px; }
+  .instructions { background: #fff9e6; border: 3px solid #000; box-shadow: 5px 5px 0 #000; padding: 18px 18px 14px; margin-bottom: 22px; position: relative; }
+  .instr-label { position: absolute; top: -14px; left: 16px; background: #ff6eb4; border: 2px solid #000; padding: 2px 10px; font-size: 11px; font-weight: 900; color: white; letter-spacing: 1px; }
+  .instr-title { font-size: 14px; font-weight: 700; color: #222; margin-bottom: 6px; margin-top: 4px; }
+  .instr-sub { font-size: 13px; color: #555; }
+  .instr-sub span { font-weight: 900; color: #e0006e; }
+  .questions { display: flex; flex-direction: column; gap: 10px; }
+  .q-card { border: 3px solid #000; box-shadow: 4px 4px 0 #000; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; transition: background 0.2s; }
+  .q-left { display: flex; align-items: flex-start; gap: 10px; flex: 1; min-width: 200px; }
+  .q-num { background: #e0006e; color: white; font-weight: 900; font-size: 12px; min-width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border: 2px solid #000; flex-shrink: 0; }
+  .q-text { font-size: 13px; color: #222; font-weight: 600; line-height: 1.5; }
+  .q-btns { display: flex; gap: 8px; flex-shrink: 0; }
+  .btn { border: 3px solid #000; box-shadow: 4px 4px 0 #000; padding: 6px 14px; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.1s; letter-spacing: 0.5px; }
+  .btn:hover { transform: translate(1px,1px); box-shadow: 2px 2px 0 #000; }
+  .btn-yes { background: #ff6eb4; color: white; }
+  .btn-yes.active { background: #e0006e; box-shadow: 2px 2px 0 #000; transform: translate(2px,2px); }
+  .btn-no { background: #ffe566; color: #333; }
+  .btn-no.active { background: #f0c000; box-shadow: 2px 2px 0 #000; transform: translate(2px,2px); }
+  .submit-wrap { text-align: center; margin-top: 22px; }
+  .submit-btn { background: #e0006e; color: white; border: 3px solid #000; box-shadow: 5px 5px 0 #000; padding: 13px 32px; font-size: 15px; font-weight: 900; cursor: pointer; letter-spacing: 1px; transition: all 0.1s; }
+  .submit-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
+  .submit-btn:not(:disabled):hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 #000; }
+  .result { margin-top: 24px; border: 4px solid #000; box-shadow: 6px 6px 0 #000; padding: 24px; text-align: center; animation: burst 0.5s ease; display: none; }
+  @keyframes burst { 0%{transform:scale(0.8);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .result.show { display: block; }
+  .result-icon { font-size: 56px; }
+  .result-label { font-family: 'Press Start 2P', monospace; font-size: 10px; margin-top: 10px; line-height: 2; }
+  .result-score { font-size: 26px; font-weight: 900; color: #222; margin: 8px 0; }
+  .result-text { font-size: 13px; color: #555; margin-bottom: 16px; }
+  .reset-btn { background: #e0006e; color: white; border: 3px solid #000; box-shadow: 4px 4px 0 #000; padding: 10px 24px; font-size: 13px; font-weight: 900; cursor: pointer; letter-spacing: 1px; }
+  .footer { text-align: center; margin-top: 18px; font-size: 11px; color: #bbb; letter-spacing: 1px; }
+  .coin { position: fixed; font-size: 22px; opacity: 0.15; pointer-events: none; animation: spin 1.8s linear infinite; }
+  @keyframes spin { 0%{transform:scaleX(1)} 50%{transform:scaleX(0.1)} 100%{transform:scaleX(1)} }
+</style>
+</head>
+<body>
+<div class="coin" style="top:8%;left:10%">🪙</div>
+<div class="coin" style="top:15%;left:85%;animation-delay:0.3s">🪙</div>
+<div class="coin" style="top:70%;left:5%;animation-delay:0.7s">🪙</div>
+<div class="coin" style="top:75%;left:90%;animation-delay:1s">🪙</div>
+<div class="coin" style="top:5%;left:50%;animation-delay:0.5s">🪙</div>
+<div class="wrap">
+  <div class="header">
+    <div class="princess">👸</div><br/>
+    <span class="title-badge">WORK·LIFE BALANCE POLICE</span>
+    <div class="stars">🍄 ⭐ 🌸 ⭐ 🍄</div>
+  </div>
+  <div class="instructions">
+    <div class="instr-label">📋 INSTRUCTIONS</div>
+    <p class="instr-title">This is your Work-Life Balance daily check-in.</p>
+    <p class="instr-sub">Answer all 12 questions honestly. Get at least <span>10 out of 12 YES</span> to earn today's ⭐</p>
+  </div>
+  <div class="questions" id="questions"></div>
+  <div class="submit-wrap">
+    <button class="submit-btn" id="submitBtn" disabled onclick="checkScore()">Answer all questions (0/12)</button>
+  </div>
+  <div class="result" id="result">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-label pixel" id="resultLabel"></div>
+    <div class="result-score" id="resultScore"></div>
+    <p class="result-text" id="resultText"></p>
+    <button class="reset-btn" onclick="resetTest()">🔄 TRY AGAIN</button>
+  </div>
+  <div class="footer">🍄 WORK·LIFE BALANCE POLICE DEPT. 🍄</div>
+</div>
+<script>
+const questions = ["Did you sleep at least 6 hours last night?","Did you finish work on time today?","Did you have a break at work at least once?","Did you NOT faint today?","Did you go outside today?","Did you take one beautiful picture today?","Did you stay focused at work today?","Did you get to laugh today?","Can you think of 1 beautiful thing you noticed today?","Did you do something just for yourself today?","Did you talk to someone who made you feel good today?","Did you take a deep breath today — on purpose?"];
+const colors = ["#fff0f6","#fff7e0","#f0fff4","#f0f4ff","#fff0f6","#fffbe0","#f4f0ff","#fff0f6","#e0fff8","#fff7e0","#f0f0ff","#fff0e0"];
+let answers = new Array(12).fill(null);
+let submitted = false;
+function buildQuestions() {
+  const container = document.getElementById("questions");
+  container.innerHTML = "";
+  questions.forEach((q, i) => {
+    const card = document.createElement("div");
+    card.className = "q-card"; card.id = `card-${i}`; card.style.background = colors[i];
+    card.innerHTML = `<div class="q-left"><div class="q-num">${i+1}</div><div class="q-text">${q}</div></div><div class="q-btns"><button class="btn btn-yes" id="yes-${i}" onclick="setAnswer(${i},'yes')">YES ✓</button><button class="btn btn-no" id="no-${i}" onclick="setAnswer(${i},'no')">NO ✗</button></div>`;
+    container.appendChild(card);
+  });
+}
+function setAnswer(i, val) { if (submitted) return; answers[i] = answers[i] === val ? null : val; updateUI(); }
+function updateUI() {
+  let answered = 0;
+  answers.forEach((a, i) => {
+    const yesBtn = document.getElementById(`yes-${i}`); const noBtn = document.getElementById(`no-${i}`);
+    if (a === "yes") { yesBtn.classList.add("active"); noBtn.classList.remove("active"); answered++; }
+    else if (a === "no") { noBtn.classList.add("active"); yesBtn.classList.remove("active"); answered++; }
+    else { yesBtn.classList.remove("active"); noBtn.classList.remove("active"); }
+  });
+  const btn = document.getElementById("submitBtn");
+  if (answered === 12) { btn.disabled = false; btn.textContent = "✨ CHECK MY SCORE ✨"; }
+  else { btn.disabled = true; btn.textContent = `Answer all questions (${answered}/12)`; }
+}
+function checkScore() {
+  submitted = true;
+  const yesCount = answers.filter(a => a === "yes").length;
+  const passed = yesCount >= 10;
+  answers.forEach((a, i) => { document.getElementById(`card-${i}`).style.background = a === "yes" ? "#d4f7d4" : "#ffd4d4"; });
+  document.getElementById("submitBtn").style.display = "none";
+  const result = document.getElementById("result");
+  result.style.background = passed ? "#fff3e0" : "#fff0f6";
+  document.getElementById("resultIcon").textContent = passed ? "⭐" : "🌸";
+  document.getElementById("resultLabel").textContent = passed ? "STAR UNLOCKED!" : "KEEP GOING!";
+  document.getElementById("resultLabel").style.color = passed ? "#e0006e" : "#888";
+  document.getElementById("resultScore").textContent = `${yesCount} / 12 YES`;
+  document.getElementById("resultText").textContent = passed ? "You passed the Work-Life Balance Police check! Today you truly took care of yourself. 👑" : `Just ${10 - yesCount} more YES and you earn the star. Tomorrow is a new chance! 💪`;
+  result.classList.add("show");
+  result.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+function resetTest() {
+  answers = new Array(12).fill(null); submitted = false;
+  document.getElementById("result").classList.remove("show");
+  document.getElementById("submitBtn").style.display = "inline-block";
+  buildQuestions(); updateUI();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+buildQuestions();
+</script>
+</body>
+</html>
