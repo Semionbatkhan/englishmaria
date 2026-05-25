@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete the sentences</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;background:#f5f0e8;}
+body{display:flex;align-items:center;justify-content:center;padding:16px;font-family:'Nunito',sans-serif;}
+.ex{width:100%;max-width:540px;border:2.5px solid #1A1A1A;border-radius:20px;overflow:hidden;background:#FFF4DF;}
+.ex-head{background:#E8553A;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2.5px solid #1A1A1A;}
+.ex-head-title{font-size:13px;font-weight:900;color:#FFF4DF;text-transform:uppercase;letter-spacing:1px;}
+.dots{display:flex;gap:6px;align-items:center;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.3);border:1.5px solid rgba(255,255,255,0.4);transition:all .2s;}
+.dot.done{background:#FFD53F;border-color:#FFD53F;}
+.dot.active{background:#fff;border-color:#fff;}
+.ex-body{padding:24px 24px 20px;}
+.instruction{display:inline-flex;align-items:center;gap:6px;background:#1A1A1A;border-radius:30px;padding:4px 12px;margin-bottom:18px;}
+.instruction span{font-size:11px;font-weight:900;color:#FFF4DF;text-transform:uppercase;letter-spacing:.8px;}
+.sentence-num{font-size:12px;font-weight:900;color:#E8553A;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
+.sentence-text{font-size:21px;font-weight:900;color:#1A1A1A;line-height:1.45;margin-bottom:20px;}
+.word-chip{display:inline-block;background:#E8553A;color:#fff;border-radius:6px;padding:1px 8px;font-size:20px;font-weight:900;}
+.notes-block{margin-bottom:18px;}
+.notes-label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:900;color:#aaa;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;}
+.notes-label span{background:#F1EFE8;border-radius:10px;padding:1px 8px;font-size:10px;font-weight:900;color:#888;}
+textarea{width:100%;border:2px solid #D3D1C7;border-radius:12px;padding:11px 14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:#1A1A1A;background:#fff;resize:none;outline:none;line-height:1.5;transition:border-color .15s;}
+textarea:focus{border-color:#E8553A;}
+textarea::placeholder{color:#ccc;font-weight:600;font-style:italic;}
+.ready-row{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;padding:10px 14px;border:2px solid #1A1A1A;border-radius:12px;background:#fff;transition:all .15s;}
+.ready-row.checked{background:#1A1A1A;}
+.ready-check{width:22px;height:22px;border:2px solid #1A1A1A;border-radius:6px;display:flex;align-items:center;justify-content:center;background:#fff;flex-shrink:0;transition:all .15s;}
+.ready-row.checked .ready-check{background:#FFD53F;border-color:#FFD53F;}
+.ready-label{font-size:14px;font-weight:900;color:#1A1A1A;transition:color .15s;}
+.ready-row.checked .ready-label{color:#FFF4DF;}
+.ex-nav{border-top:2px solid #1A1A1A;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;background:#FFF4DF;}
+.nav-btn{display:flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#1A1A1A;background:none;border:2px solid #1A1A1A;border-radius:30px;padding:7px 16px;cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.5px;}
+.nav-btn:hover{background:#1A1A1A;color:#FFF4DF;}
+.nav-btn:disabled{opacity:.3;cursor:default;}
+.nav-btn:disabled:hover{background:none;color:#1A1A1A;}
+.nav-count{font-size:14px;font-weight:900;color:#888;}
+.nav-next{background:#E8553A;border-color:#E8553A;color:#fff;}
+.nav-next:hover{background:#c94428;border-color:#c94428;color:#fff;}
+.summary-head{background:#1A1A1A;padding:20px 24px;border-bottom:2.5px solid #1A1A1A;}
+.summary-head-title{font-size:20px;font-weight:900;color:#FFD53F;margin-bottom:2px;}
+.summary-head-sub{font-size:13px;font-weight:700;color:#888;}
+.summary-body{padding:20px 24px;}
+.summary-item{margin-bottom:10px;border:2px solid #1A1A1A;border-radius:14px;overflow:hidden;}
+.summary-item-top{padding:12px 16px;background:#fff;}
+.summary-item-num{font-size:10px;font-weight:900;color:#E8553A;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.summary-item-sentence{font-size:14px;font-weight:900;color:#1A1A1A;line-height:1.4;}
+.chip-sm{display:inline-block;background:#FAECE7;color:#993C1D;border-radius:4px;padding:0 5px;}
+.summary-item-note{padding:8px 16px;background:#FFF4DF;border-top:1.5px solid #E8E0D0;font-size:13px;font-weight:700;color:#aaa;font-style:italic;}
+.summary-item-note.has-note{color:#1A1A1A;font-style:normal;}
+.summary-ready{display:inline-flex;align-items:center;gap:4px;margin-top:5px;font-size:11px;font-weight:900;color:#3B6D11;background:#EAF3DE;border-radius:10px;padding:2px 8px;}
+.talk-banner{background:#FFD53F;border:2px solid #1A1A1A;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px;margin-top:4px;}
+.talk-icon{width:40px;height:40px;background:#1A1A1A;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.talk-text-title{font-size:15px;font-weight:900;color:#1A1A1A;margin-bottom:2px;}
+.talk-text-sub{font-size:12px;font-weight:700;color:#5F5E5A;}
+</style>
+</head>
+<body>
+<div class="ex" id="app"></div>
+
+<script>
+const sentences = [
+  { before: "I find it ", word: "inappropriate", after: " when people" },
+  { before: "I feel ", word: "uncomfortable", after: " when" },
+  { before: "I think people ", word: "judge", after: " others because" },
+  { before: "A person seems ", word: "fake", after: " when they" },
+  { before: "I ", word: "respect", after: " people who" },
+  { before: "I get ", word: "annoyed", after: " when someone" },
+  { before: "It's ", word: "embarrassing", after: " when" },
+  { before: "In my opinion, people ", word: "shouldn't", after: " … in serious situations" }
+];
+
+let current = 0;
+let answers = sentences.map(() => ({ note: "", ready: false }));
+let showSummary = false;
+
+function render() {
+  document.getElementById("app").innerHTML = showSummary ? summaryHTML() : cardHTML();
+  attachListeners();
+}
+
+function cardHTML() {
+  const s = sentences[current];
+  const a = answers[current];
+
+  const dots = sentences.map((_, i) =>
+    `<div class="dot${i < current ? " done" : i === current ? " active" : ""}"></div>`
+  ).join("");
+
+  return `
+    <div class="ex-head">
+      <span class="ex-head-title">Complete the sentences</span>
+      <div class="dots">${dots}</div>
+    </div>
+
+    <div class="ex-body">
+      <div class="instruction">
+        <i class="ti ti-message-circle" style="font-size:14px;color:#FFF4DF;"></i>
+        <span>Use the highlighted word</span>
+      </div>
+
+      <div class="sentence-num">Sentence ${current + 1} of ${sentences.length}</div>
+
+      <div class="sentence-text">
+        ${s.before}<span class="word-chip">${s.word}</span>${s.after}…
+      </div>
+
+      <div class="notes-block">
+        <div class="notes-label">
+          <i class="ti ti-pencil" style="font-size:14px;color:#aaa;"></i>
+          Jot down your idea <span>optional</span>
+        </div>
+        <textarea id="ans" rows="2" placeholder="e.g. …they interrupt others without saying sorry">${a.note}</textarea>
+      </div>
+
+      <div class="ready-row${a.ready ? " checked" : ""}" id="ready-row">
+        <div class="ready-check">
+          ${a.ready ? '<i class="ti ti-check" style="font-size:14px;color:#1A1A1A;"></i>' : ""}
+        </div>
+        <span class="ready-label">I'm ready to discuss this</span>
+      </div>
+    </div>
+
+    <div class="ex-nav">
+      <button class="nav-btn" id="btn-prev" ${current === 0 ? "disabled" : ""}>
+        <i class="ti ti-arrow-left" style="font-size:15px;"></i> Back
+      </button>
+
+      <span class="nav-count">${current + 1} / ${sentences.length}</span>
+
+      <button class="nav-btn nav-next" id="btn-next">
+        ${current === sentences.length - 1
+          ? 'Done <i class="ti ti-check" style="font-size:15px;"></i>'
+          : 'Next <i class="ti ti-arrow-right" style="font-size:15px;"></i>'}
+      </button>
+    </div>
+  `;
+}
+
+function summaryHTML() {
+  const readyCount = answers.filter(a => a.ready).length;
+
+  const items = sentences.map((s, i) => {
+    const a = answers[i];
+
+    return `
+      <div class="summary-item">
+        <div class="summary-item-top">
+          <div class="summary-item-num">Sentence ${i + 1}</div>
+          <div class="summary-item-sentence">
+            ${s.before}<span class="chip-sm">${s.word}</span>${s.after}…
+          </div>
+
+          ${a.ready
+            ? '<div class="summary-ready"><i class="ti ti-check" style="font-size:11px;"></i> Ready to discuss</div>'
+            : ""}
+        </div>
+
+        ${a.note.trim()
+          ? `<div class="summary-item-note has-note">"${a.note.trim()}"</div>`
+          : '<div class="summary-item-note">No notes — speak freely!</div>'}
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="summary-head">
+      <div class="summary-head-title">Ready to talk! ${readyCount}/${sentences.length}</div>
+      <div class="summary-head-sub">Share your ideas with your partner — there are no wrong answers</div>
+    </div>
+
+    <div class="summary-body">
+      ${items}
+
+      <div class="talk-banner">
+        <div class="talk-icon">
+          <i class="ti ti-users" style="font-size:20px;color:#FFD53F;"></i>
+        </div>
+        <div>
+          <div class="talk-text-title">Time to speak!</div>
+          <div class="talk-text-sub">Discuss each sentence with your partner. Be ready to explain your ideas.</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function save() {
+  const ta = document.getElementById("ans");
+  if (ta) answers[current].note = ta.value;
+}
+
+function attachListeners() {
+  const prev = document.getElementById("btn-prev");
+  const next = document.getElementById("btn-next");
+  const row = document.getElementById("ready-row");
+
+  if (prev) {
+    prev.addEventListener("click", () => {
+      save();
+      current--;
+      render();
+    });
+  }
+
+  if (next) {
+    next.addEventListener("click", () => {
+      save();
+
+      if (current === sentences.length - 1) {
+        showSummary = true;
+        render();
+      } else {
+        current++;
+        render();
+      }
+    });
+  }
+
+  if (row) {
+    row.addEventListener("click", () => {
+      save();
+      answers[current].ready = !answers[current].ready;
+      render();
+    });
+  }
+}
+
+render();
+</script>
+</body>
+</html>
