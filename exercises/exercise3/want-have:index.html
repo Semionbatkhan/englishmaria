@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I want to / I have to</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f6f2ea;
+    --ink:#232020;
+    --line:#d8d0c2;
+    --a-want:#2f6f5e;
+    --a-want-bg:#e3efe9;
+    --a-have:#a8631f;
+    --a-have-bg:#f6e9d8;
+    --card-bg:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,42px);
+    margin:0 0 6px;
+    line-height:1.05;
+  }
+  .sub{
+    font-size:15px;
+    color:#6b6259;
+    margin:0 0 8px;
+    max-width:560px;
+  }
+  .instructions{
+    font-size:14.5px;
+    color:var(--ink);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:22px;
+    line-height:1.6;
+  }
+  .instructions b{color:var(--a-want);}
+  .progress-count{
+    font-size:13px;
+    font-weight:700;
+    color:#6b6259;
+    white-space:nowrap;
+    background:#fff;
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:99px;
+    display:inline-block;
+    margin-bottom:18px;
+  }
+  .add-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:22px;
+    flex-wrap:wrap;
+  }
+  .add-row input{
+    flex:1;
+    min-width:200px;
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1.5px solid var(--ink);
+    background:#fff;
+    color:var(--ink);
+  }
+  .add-row input::placeholder{color:#a49b8f;}
+  .add-row input:focus{outline:2px solid var(--a-want);outline-offset:1px;}
+  .add-row button{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:0 20px;
+    border-radius:10px;
+    border:1.5px solid var(--ink);
+    background:var(--ink);
+    color:var(--cream);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .add-row button:hover{opacity:.85;}
+  .bank{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:16px;
+    background:#fff;
+    border:1px dashed var(--line);
+    border-radius:14px;
+    margin-bottom:26px;
+    min-height:64px;
+    align-items:center;
+  }
+  .bank-empty-msg{
+    font-size:14px;
+    color:#a49b8f;
+    font-style:italic;
+  }
+  .card{
+    background:var(--card-bg);
+    border:1.5px solid var(--ink);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:14.5px;
+    font-weight:500;
+    cursor:pointer;
+    user-select:none;
+    transition:transform .12s ease, box-shadow .12s ease;
+    box-shadow:2px 2px 0 rgba(35,32,32,0.08);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .card:hover{
+    transform:translateY(-2px);
+    box-shadow:3px 4px 0 rgba(35,32,32,0.12);
+  }
+  .card:active{transform:translateY(0);}
+  .card.selected{
+    box-shadow:0 0 0 3px var(--ink);
+  }
+  .card .del{
+    font-size:13px;
+    opacity:.5;
+    padding:0 2px;
+  }
+  .card .del:hover{opacity:1;}
+  .columns{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:24px;
+  }
+  .col{
+    border-radius:16px;
+    padding:16px;
+    min-height:220px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    border:2px dashed var(--line);
+    cursor:pointer;
+  }
+  .col.want{background:var(--a-want-bg);border-color:var(--a-want);}
+  .col.have{background:var(--a-have-bg);border-color:var(--a-have);}
+  .col-title{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:19px;
+    margin:0;
+  }
+  .col.want .col-title{color:var(--a-want);}
+  .col.have .col-title{color:var(--a-have);}
+  .col-hint{
+    font-size:12px;
+    color:#8a8177;
+    margin:-6px 0 4px;
+    font-style:italic;
+  }
+  .col-cards{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    flex:1;
+    align-content:flex-start;
+  }
+  .col .card{border-color:currentColor;}
+  .controls{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+  }
+  button.reset{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 18px;
+    border-radius:10px;
+    border:1.5px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  button.reset:hover{opacity:.7;}
+  .discuss{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 20px;
+    margin-top:8px;
+  }
+  .discuss h2{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    margin:0 0 10px;
+  }
+  .discuss ul{
+    margin:0;
+    padding-left:20px;
+    font-size:14.5px;
+    line-height:1.9;
+  }
+  @media(max-width:560px){
+    .columns{grid-template-columns:1fr;}
+    .col{min-height:140px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>I want to / I have to</h1>
+  <p class="sub">What do you do every day?</p>
+  <div class="instructions">
+    <b>Step 1:</b> Write things you do in your life (2-4 words). Example: <i>"clean the house"</i>, <i>"learn English"</i>, <i>"answer emails"</i>.<br>
+    <b>Step 2:</b> Click your card, then click the right column: <b>I want to</b> or <b>I have to</b>.
+  </div>
+
+  <span class="progress-count" id="progressLabel">0 actions</span>
+
+  <div class="add-row">
+    <input type="text" id="newCardInput" placeholder="Write what you do..." maxlength="40">
+    <button id="addBtn">+ Add</button>
+  </div>
+
+  <div class="bank" id="bank">
+    <span class="bank-empty-msg">Your new cards will appear here. Click one, then click a column.</span>
+  </div>
+
+  <div class="columns">
+    <div class="col want" data-col="want">
+      <p class="col-title">I want to...</p>
+      <p class="col-hint">things you enjoy</p>
+      <div class="col-cards" data-drop="want"></div>
+    </div>
+    <div class="col have" data-col="have">
+      <p class="col-title">I have to...</p>
+      <p class="col-hint">things you must do</p>
+      <div class="col-cards" data-drop="have"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="reset" id="resetBtn">Clear all</button>
+  </div>
+
+  <div class="discuss">
+    <h2>Now talk about it</h2>
+    <ul>
+      <li>Which column is longer?</li>
+      <li>What do you enjoy doing?</li>
+      <li>What do you do only because you must?</li>
+      <li>What gives you energy?</li>
+      <li>What takes too much time?</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+let cards = []; // {id, text, col: null | 'want'|'have'}
+let nextId = 1;
+let selectedId = null;
+
+const bank = document.getElementById('bank');
+const input = document.getElementById('newCardInput');
+const addBtn = document.getElementById('addBtn');
+
+function addCard(){
+  const text = input.value.trim();
+  if(!text) return;
+  cards.push({id: nextId++, text, col: null});
+  input.value = '';
+  input.focus();
+  render();
+}
+
+addBtn.addEventListener('click', addCard);
+input.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') addCard();
+});
+
+function render(){
+  bank.innerHTML = '';
+  document.querySelectorAll('.col-cards').forEach(z => z.innerHTML = '');
+
+  const unplaced = cards.filter(c => !c.col);
+  if(unplaced.length === 0){
+    const msg = document.createElement('span');
+    msg.className = 'bank-empty-msg';
+    msg.textContent = cards.length === 0
+      ? 'Your new cards will appear here. Click one, then click a column.'
+      : 'All cards placed. Add more, or clear all to start again.';
+    bank.appendChild(msg);
+  }
+
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    if(c.id === selectedId) card.classList.add('selected');
+
+    const label = document.createElement('span');
+    label.textContent = c.text;
+    card.appendChild(label);
+
+    const del = document.createElement('span');
+    del.className = 'del';
+    del.textContent = '✕';
+    del.title = 'Remove';
+    del.addEventListener('click', (e) => {
+      e.stopPropagation();
+      cards = cards.filter(x => x.id !== c.id);
+      if(selectedId === c.id) selectedId = null;
+      render();
+    });
+    card.appendChild(del);
+
+    card.addEventListener('click', () => {
+      selectedId = (selectedId === c.id) ? null : c.id;
+      render();
+    });
+
+    if(c.col){
+      document.querySelector(`[data-drop="${c.col}"]`).appendChild(card);
+    } else {
+      bank.appendChild(card);
+    }
+  });
+
+  document.getElementById('progressLabel').textContent =
+    cards.length === 1 ? '1 action' : `${cards.length} actions`;
+}
+
+document.querySelectorAll('.col').forEach(colEl => {
+  colEl.addEventListener('click', () => {
+    if(selectedId === null) return;
+    const card = cards.find(c => c.id === selectedId);
+    if(card){
+      card.col = colEl.dataset.col;
+      selectedId = null;
+      render();
+    }
+  });
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if(cards.length === 0) return;
+  if(confirm('Remove all your cards and start again?')){
+    cards = [];
+    selectedId = null;
+    render();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
